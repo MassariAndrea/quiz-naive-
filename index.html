@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/style.css">
+
+</head>
+
+<body class="body">
+    <div class="quiz">
+        <div class="question">
+            <h2 id="testo"> </h2>
+            <div >
+                <input type="text" name="answer" id="answer" />
+                <input type="submit" value="Rispondi" class="button" id="butt" />
+            </div>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+
+
+        let questions = [
+            {
+                "n_domanda": 1,
+                "testo_domanda": "Qual è la capitale dell'Italia?",
+                "risposta_utente": "",
+                "risposta_corretta": "roma",
+                "punteggio": 2
+            },
+            {
+                "n_domanda": 2,
+                "testo_domanda": "Come si chiama Scanni?",
+                "risposta_utente": "",
+                "risposta_corretta": "frank",
+                "punteggio": 4
+            },
+            {
+                "n_domanda": 3,
+                "testo_domanda": "Qual è la capitale della Francia?",
+                "risposta_utente": "",
+                "risposta_corretta": "parigi",
+                "punteggio": 2
+            },
+            {
+                "n_domanda": 4,
+                "testo_domanda": "Chi ha scritto la Divina Commedia?",
+                "risposta_utente": "",
+                "risposta_corretta": "dante",
+                "punteggio": 3
+            },
+            {
+                "n_domanda": 5,
+                "testo_domanda": "In quale anno è stata unificata l'Italia?",
+                "risposta_utente": "",
+                "risposta_corretta": "1861",
+                "punteggio": 5
+            }
+        ];
+
+        let TuttoDomanda = 0;
+        let bottone = document.querySelector('#butt');
+
+
+        function Domanda(index) {
+            let question = questions[index];
+            document.querySelector('#testo').textContent = question.testo_domanda;
+
+        }
+
+        window.addEventListener('load', function () {
+            
+
+            Domanda(TuttoDomanda)
+            butt.addEventListener('click', function () {
+                let risposta = document.querySelector('#answer').value.toLowerCase();
+                document.querySelector('#answer').value = ""
+                let correctAnswer = questions[TuttoDomanda].risposta_corretta;
+                if (risposta === correctAnswer) {
+                    document.querySelector('#result').textContent = "Risposta corretta!";
+                    setTimeout(function(){
+                        document.querySelector('#result').textContent = ""
+                    },2000)
+
+                } else {
+                    document.querySelector('#result').textContent = "Risposta sbagliata. La risposta corretta è: " + correctAnswer;
+                    setTimeout(function(){
+                        document.querySelector('#result').textContent = ""
+                    },2000)
+                }
+
+                if (TuttoDomanda < questions.length - 1) {
+                    TuttoDomanda++;  
+                    Domanda(TuttoDomanda);  
+                } else {
+                    document.querySelector('#result').textContent = "Hai completato il quiz!";
+                }
+
+
+            });
+
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>
